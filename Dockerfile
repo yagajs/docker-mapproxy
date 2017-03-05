@@ -34,4 +34,5 @@ CMD ["mapproxy"]
 USER mapproxy
 VOLUME ["/mapproxy"]
 EXPOSE 8080
-EXPOSE 9191 # Stats
+# Stats
+EXPOSE 9191
