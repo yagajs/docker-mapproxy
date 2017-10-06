@@ -20,12 +20,13 @@ if [ "$1" = 'mapproxy' ]; then
   fi
   echo "Start mapproxy"
 
+  # --wsgi-disable-file-wrapper is required because of https://github.com/unbit/uwsgi/issues/1126
   if [ "$2" = 'http' ]; then
-    exec uwsgi --http 0.0.0.0:8080 --wsgi-file /mapproxy/app.py --master --enable-threads --processes $MAPPROXY_PROCESSES --threads $MAPPROXY_THREADS --stats 0.0.0.0:9191
+    exec uwsgi --wsgi-disable-file-wrapper --http 0.0.0.0:8080 --wsgi-file /mapproxy/app.py --master --enable-threads --processes $MAPPROXY_PROCESSES --threads $MAPPROXY_THREADS --stats 0.0.0.0:9191
     exit
   fi
 
-  exec uwsgi --http-socket 0.0.0.0:8080 --wsgi-file /mapproxy/app.py --master --enable-threads --processes $MAPPROXY_PROCESSES --threads $MAPPROXY_THREADS --stats 0.0.0.0:9191
+  exec uwsgi --wsgi-disable-file-wrapper --http-socket 0.0.0.0:8080 --wsgi-file /mapproxy/app.py --master --enable-threads --processes $MAPPROXY_PROCESSES --threads $MAPPROXY_THREADS --stats 0.0.0.0:9191
   exit
 fi
 
