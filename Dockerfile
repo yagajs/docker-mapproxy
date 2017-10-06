@@ -1,7 +1,7 @@
-FROM python:2.7
+FROM python:3
 MAINTAINER Arne Schubert<atd.schubert@gmail.com>
 
-ENV MAPPROXY_VERSION 1.9.1
+ENV MAPPROXY_VERSION 1.10.4 
 ENV MAPPROXY_PROCESSES 4
 ENV MAPPROXY_THREADS 2
 
@@ -20,11 +20,13 @@ RUN set -x \
     zlib1g-dev \
     libfreetype6-dev \
     python-virtualenv \
+    apt-utils \
   && rm -rf /var/lib/apt/lists/* \
   && useradd -ms /bin/bash mapproxy \
   && mkdir -p /mapproxy \
   && chown mapproxy /mapproxy \
-  && pip install Shapely Pillow uwsgi MapProxy==$MAPPROXY_VERSION  \
+  && pip install --upgrade pip \
+  && pip install Shapely Pillow requests geojson uwsgi MapProxy==$MAPPROXY_VERSION  \
   && mkdir -p /docker-entrypoint-initmapproxy.d
 
 COPY docker-entrypoint.sh /
