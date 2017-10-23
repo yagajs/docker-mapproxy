@@ -4,13 +4,30 @@ MapProxy docker image from the [YAGA Development-Team](https://yagajs.org)
 
 ## Supported tags
 
-* `1.9.1`, `latest`
+* `1.10.4`, `1.10`, `1`, `latest`
+* `1.10.4-alpine`, `1.10-alpine`, `1-alpine`, `alpine`
+* `1.10.3`
+* `1.10.3-alpine`
+* `1.10.2`
+* `1.10.2-alpine`
+* `1.10.1`
+* `1.10.1-alpine`
+* `1.10.0`
+* `1.10.0-alpine`
+* `1.9.1`, `1.9`
+* `1.9.1-alpine`, `1.9-alpine`
 * `1.9.0`
-* `1.8.2`
+* `1.9.0-alpine`
+* `1.8.2`, `1.8`
+* `1.8.2-alpine`, `1.8-alpine`
 * `1.8.1`
+* `1.8.1-alpine`
 * `1.8.0`
-* `1.7.1`
+* `1.8.0-alpine`
+* `1.7.1`, `1.7`
+* `1.7.1-alpine`, `1.7-alpine`
 * `1.7.0`
+* `1.7.0-alpine`
 
 ## What is MapProxy
 
