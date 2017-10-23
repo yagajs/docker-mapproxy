@@ -1,30 +1,23 @@
-FROM python:2.7
+FROM python:3-alpine
 MAINTAINER Arne Schubert<atd.schubert@gmail.com>
 
-ENV MAPPROXY_VERSION 1.9.1
+ARG MAPPROXY_VERSION=1.9.1
+
+ENV MAPPROXY_VERSION $MAPPROXY_VERSION
 ENV MAPPROXY_PROCESSES 4
 ENV MAPPROXY_THREADS 2
 
 RUN set -x \
-  && apt-get update \
-  && DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y \
-    python-imaging \
-    python-yaml \
-    libproj0 \
-    libgeos-dev \
-    python-lxml \
-    libgdal-dev \
-    build-essential \
-    python-dev \
-    libjpeg-dev \
-    zlib1g-dev \
-    libfreetype6-dev \
-    python-virtualenv \
-  && rm -rf /var/lib/apt/lists/* \
-  && useradd -ms /bin/bash mapproxy \
-  && mkdir -p /mapproxy \
-  && chown mapproxy /mapproxy \
-  && pip install Shapely Pillow uwsgi MapProxy==$MAPPROXY_VERSION  \
+  && apk add --no-cache --virtual .build-deps \
+    build-base linux-headers curl \
+    zlib-dev jpeg-dev \
+  && apk add --no-cache \
+    --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing \
+    gdal-dev proj4-dev geos-dev \
+  && adduser -h /mapproxy -s /bin/sh -D mapproxy \
+  && pip install Shapely Pillow requests geojson uwsgi pyproj MapProxy==$MAPPROXY_VERSION \
+  && apk del build-base \
+  && rm -Rf /root/* /root/.cache \
   && mkdir -p /docker-entrypoint-initmapproxy.d
 
 COPY docker-entrypoint.sh /

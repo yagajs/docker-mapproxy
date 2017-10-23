@@ -1,13 +1,13 @@
-#!/bin/bash
+#!/bin/sh
 set -e
 
 if [ "$1" = 'mapproxy' ]; then
   echo "Running additional provisioning"
   for f in /docker-entrypoint-initmapproxy.d/*; do
     case "$f" in
-      *.sh)     echo "$0: running $f"; . "$f" ;;
-      mapproxy.yml)   cp /docker-entrypoint-initmapproxy.d/mapproxy.yml /mapproxy/mapproxy.yaml ;;
-      mapproxy.yaml) cp /docker-entrypoint-initmapproxy.d/mapproxy.yaml /mapproxy/mapproxy.yaml ;;
+      */*.sh)     echo "$0: running $f"; . "$f" ;;
+      */mapproxy.yml)   cp /docker-entrypoint-initmapproxy.d/mapproxy.yml /mapproxy/mapproxy.yaml ;;
+      */mapproxy.yaml) cp /docker-entrypoint-initmapproxy.d/mapproxy.yaml /mapproxy/mapproxy.yaml ;;
     esac
     echo
   done
@@ -21,11 +21,11 @@ if [ "$1" = 'mapproxy' ]; then
   echo "Start mapproxy"
 
   if [ "$2" = 'http' ]; then
-    exec uwsgi --http 0.0.0.0:8080 --wsgi-file /mapproxy/app.py --master --enable-threads --processes $MAPPROXY_PROCESSES --threads $MAPPROXY_THREADS --stats 0.0.0.0:9191
+    exec uwsgi --wsgi-disable-file-wrapper --http 0.0.0.0:8080 --wsgi-file /mapproxy/app.py --master --enable-threads --processes $MAPPROXY_PROCESSES --threads $MAPPROXY_THREADS --stats 0.0.0.0:9191
     exit
   fi
 
-  exec uwsgi --http-socket 0.0.0.0:8080 --wsgi-file /mapproxy/app.py --master --enable-threads --processes $MAPPROXY_PROCESSES --threads $MAPPROXY_THREADS --stats 0.0.0.0:9191
+  exec uwsgi --wsgi-disable-file-wrapper --http-socket 0.0.0.0:8080 --wsgi-file /mapproxy/app.py --master --enable-threads --processes $MAPPROXY_PROCESSES --threads $MAPPROXY_THREADS --stats 0.0.0.0:9191
   exit
 fi
 
