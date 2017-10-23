@@ -20,7 +20,6 @@ RUN set -x \
     zlib1g-dev \
     libfreetype6-dev \
     python-virtualenv \
-    apt-utils \
   && rm -rf /var/lib/apt/lists/* \
   && useradd -ms /bin/bash mapproxy \
   && mkdir -p /mapproxy \
