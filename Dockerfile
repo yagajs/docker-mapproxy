@@ -25,7 +25,7 @@ RUN set -x \
   && mkdir -p /mapproxy \
   && chown mapproxy /mapproxy \
   && pip install --upgrade pip \
-  && pip install Shapely Pillow requests geojson uwsgi MapProxy==$MAPPROXY_VERSION  \
+  && pip install Shapely Pillow requests geojson uwsgi boto3 MapProxy==$MAPPROXY_VERSION  \
   && mkdir -p /docker-entrypoint-initmapproxy.d
 
 COPY docker-entrypoint.sh /
