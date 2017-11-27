@@ -15,7 +15,7 @@ RUN set -x \
     --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing \
     gdal-dev proj4-dev geos-dev \
   && adduser -h /mapproxy -s /bin/sh -D mapproxy \
-  && pip install Shapely Pillow requests geojson uwsgi pyproj MapProxy==$MAPPROXY_VERSION \
+  && pip install Shapely Pillow requests geojson uwsgi pyproj boto3 MapProxy==$MAPPROXY_VERSION \
   && apk del build-base \
   && rm -Rf /root/* /root/.cache \
   && mkdir -p /docker-entrypoint-initmapproxy.d
