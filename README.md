@@ -4,8 +4,10 @@ MapProxy docker image from the [YAGA Development-Team](https://yagajs.org)
 
 ## Supported tags
 
-* `1.10.4`, `1.10`, `1`, `latest`
-* `1.10.4-alpine`, `1.10-alpine`, `1-alpine`, `alpine`
+* `1.11.0`, `1.11`, `1`, `latest`
+* `1.11.0-alpine`, `1.11-alpine`, `1-alpine`, `alpine`
+* `1.10.4`, `1.10`
+* `1.10.4-alpine`, `1.10-alpine`
 * `1.10.3`
 * `1.10.3-alpine`
 * `1.10.2`
