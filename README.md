@@ -4,8 +4,10 @@ MapProxy docker image from the [YAGA Development-Team](https://yagajs.org)
 
 ## Supported tags
 
-* `1.10.4`, `1.10`, `1`, `latest`
-* `1.10.4-alpine`, `1.10-alpine`, `1-alpine`, `alpine`
+* `1.11.0`, `1.11`, `1`, `latest`
+* `1.11.0-alpine`, `1.11-alpine`, `1-alpine`, `alpine`
+* `1.10.4`, `1.10`
+* `1.10.4-alpine`, `1.10-alpine`
 * `1.10.3`
 * `1.10.3-alpine`
 * `1.10.2`
@@ -75,3 +77,7 @@ Before you start to code, we recommend discussing your plans through a
 [GitHub issue](https://github.com/yagajs/docker-mapproxy/issues), especially for more ambitious contributions.
 This gives other contributors a chance to point you in the right direction, give you feedback on your design, and help
 you find out if someone else is working on the same thing.
+
+## License
+
+This project is published under [ISC License](LICENSE).
