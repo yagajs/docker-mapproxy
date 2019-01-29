@@ -1,4 +1,4 @@
-FROM python:3
+FROM python:3.5
 MAINTAINER Arne Schubert<atd.schubert@gmail.com>
 
 ENV MAPPROXY_VERSION 1.11.0
@@ -10,7 +10,7 @@ RUN set -x \
   && DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y \
     python-imaging \
     python-yaml \
-    libproj0 \
+    libproj12 \
     libgeos-dev \
     python-lxml \
     libgdal-dev \
