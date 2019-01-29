@@ -1,4 +1,4 @@
-FROM python:3-alpine
+FROM python:3.5-alpine
 MAINTAINER Arne Schubert<atd.schubert@gmail.com>
 
 ARG MAPPROXY_VERSION=1.10.4
