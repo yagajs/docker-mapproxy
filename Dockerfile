@@ -1,4 +1,4 @@
-FROM python:3-alpine
+FROM python:3.5-alpine
 MAINTAINER Arne Schubert<atd.schubert@gmail.com>
 
 ARG MAPPROXY_VERSION=1.8.1
@@ -12,6 +12,7 @@ RUN set -x \
     build-base linux-headers curl \
     zlib-dev jpeg-dev \
   && apk add --no-cache \
+    --repository http://dl-cdn.alpinelinux.org/alpine/edge/main \
     --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing \
     gdal-dev proj4-dev geos-dev \
   && adduser -h /mapproxy -s /bin/sh -D mapproxy \
