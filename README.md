@@ -1,6 +1,11 @@
 # MapProxy for Docker
 
+![GitHub license](https://img.shields.io/github/license/justb4/docker-mapproxy)
+![GitHub release](https://img.shields.io/github/release/justb4/docker-mapproxy.svg)
+![Docker Pulls](https://img.shields.io/docker/pulls/justb4/mapproxy.svg)
+
 MapProxy Docker Image from the [YAGA Development-Team](https://yagajs.org).
+Adapted by [justb4](https://github.com/justb4) to latest MP version, small Docker image and extended examples.
 
 ## Supported tags
 
