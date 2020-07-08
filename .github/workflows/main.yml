@@ -27,4 +27,4 @@ jobs:
         repository: justb4/mapproxy
         tags: latest,1.12.0-1
         tag_with_ref: false
-        tag_with_sha: true
+        tag_with_sha: false

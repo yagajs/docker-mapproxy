@@ -46,6 +46,16 @@ docker run -v /path/to/mapproxy:/mapproxy -p 8080:8080 yagajs/mapproxy mapproxy 
 * `MAPPROXY_PROCESSES` default: 4
 * `MAPPROXY_THREADS` default: 2
 
+## Seeding
+
+The image also allows arbitrary commands like seeding:
+
+```bash 
+
+docker exec -it mapproxy mapproxy-seed -f /mapproxy/mapproxy.yaml -s /mapproxy/seed.yaml --seed myseed1
+
+```
+
 ## Enhance the image
 
 You can put a `mapproxy.yaml` into the `/docker-entrypoint-initmapproxy.d` folder on the image. On startup this will be

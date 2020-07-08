@@ -22,7 +22,8 @@ LABEL contributor="Just van den Broecke <justb4@gmail.com>"
 # Build ARGS
 ARG TIMEZONE="Europe/Amsterdam"
 ARG LOCALE="en_US.UTF-8"
-ARG ADD_DEB_PACKAGES=""
+# Only adds 1MB and handy tools
+ARG ADD_DEB_PACKAGES="curl xsltproc libxml2-utils"
 ARG ADD_PIP_PACKAGES=""
 ARG MAPPROXY_VERSION="1.12.0"
 

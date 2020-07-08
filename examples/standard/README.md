@@ -15,5 +15,32 @@ browse to http://localhost:8085/demo/?tms_layer=dutch_aerial&format=jpeg&srs=EPS
 ./stop.sh
 ``` 
 
-The local directory `./config` will be mapped to the MP Container `/mapproxy` dire.
-The `cache` directly will be
+The local directory `./config` will be mapped to the MP Container `/mapproxy` dir.
+The `cache` directory will be mapped to the `/mapproxy_cache` dir.
+
+## Alternaive
+
+Using `docker run`:
+
+```bash 
+docker run -v $PWD/config:/mapproxy -v $PWD/cache:/mapproxy_cache -p 8085:8080 justb4/mapproxy mapproxy http
+
+```
+## Seeding
+
+The image also allows arbitrary commands like seeding:
+
+Un running container:
+
+```bash 
+
+docker exec -it mapproxy mapproxy-seed -f /mapproxy/mapproxy.yaml -s /mapproxy/seed.yaml --seed myseed1
+
+```
+
+or standalone
+
+```bash
+docker run -v $PWD/config:/mapproxy -v $PWD/cache:/mapproxy_cache -p 8085:8080 justb4/mapproxy \
+           mapproxy-seed -f /mapproxy/mapproxy.yaml -s /mapproxy/seed.yaml --seed myseed1
+```
