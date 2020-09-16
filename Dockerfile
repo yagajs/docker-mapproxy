@@ -26,7 +26,7 @@ LABEL contributor="Just van den Broecke <justb4@gmail.com>"
 ARG TZ="Europe/Amsterdam"
 ARG LOCALE="en_US.UTF-8"
 # Only adds 1MB and handy tools
-ARG ADD_DEB_PACKAGES="curl xsltproc libxml2-utils"
+ARG ADD_DEB_PACKAGES="curl xsltproc libxml2-utils patch"
 ARG ADD_PIP_PACKAGES=""
 ARG MAPPROXY_VERSION="1.12.0"
 
@@ -54,6 +54,9 @@ RUN set -x \
   && rm -rf /var/lib/apt/lists/*
 
 # RUN sed -i -r 's|^(from )cgi|\1html|g;s|^(import )cgi$|\1html|g;s|^(import )cgi$|\1html|g;s|\{\{cgi(\.escape)|{{html\1|g' /usr/local/lib/python3.8/dist-packages/mapproxy/service/templates/demo/*.html /usr/local/lib/python3.8/dist-packages/mapproxy/service/template_helper.py
+COPY patches/ /patches
+RUN cd /patches && ./apply.sh && cd -
+
 COPY docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["mapproxy"]

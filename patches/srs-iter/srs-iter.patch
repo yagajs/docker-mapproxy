@@ -1,0 +1,12 @@
+--- srs-1.12.0.py	2020-09-16 15:10:18.000000000 +0200
++++ srs-master.py	2020-09-16 15:16:47.000000000 +0200
+@@ -444,6 +444,9 @@
+         self.supported_srs = supported_srs
+         self.preferred_srs = preferred_srs or PreferredSrcSRS()
+ 
++    def __iter__(self):
++        return iter(self.supported_srs)
++
+     def __contains__(self, srs):
+         return srs in self.supported_srs
+ 
