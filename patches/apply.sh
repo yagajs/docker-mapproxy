@@ -1,7 +1,8 @@
 #!/bin/bash
-for patch in "srs-iter"
+for patch in $(ls)
 do
-  cd ${patch}
-  ./apply.sh
-  cd -
+  if [ -d "${patch}" ]
+  then
+   cd ${patch} && ./apply.sh && cd -
+  fi
 done
