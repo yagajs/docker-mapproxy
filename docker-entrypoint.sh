@@ -27,7 +27,7 @@ if [ "$1" = 'mapproxy' ]; then
   if [ "$2" = 'http' ]; then
     UWSGI_PROTO="http"
   fi
-  echo "Start MapProxy with $MAPPROXY_PROCESSES processes and $MAPPROXY_THREADS threads, proto=$UWSGI_PROTO"
+  echo "Start MapProxy with $MAPPROXY_PROCESSES processes and $MAPPROXY_THREADS threads, proto=$UWSGI_PROTO UWSGI_EXTRA_OPTIONS=$UWSGI_EXTRA_OPTIONS"
   exec uwsgi \
        --plugin /usr/lib/uwsgi/plugins/python3_plugin.so \
        --$UWSGI_PROTO 0.0.0.0:8080 \
@@ -35,8 +35,7 @@ if [ "$1" = 'mapproxy' ]; then
        --master \
        --enable-threads \
        --processes $MAPPROXY_PROCESSES \
-       --threads $MAPPROXY_THREADS \
-       --stats 0.0.0.0:9191
+       --threads $MAPPROXY_THREADS $UWSGI_EXTRA_OPTIONS
   exit
 fi
 

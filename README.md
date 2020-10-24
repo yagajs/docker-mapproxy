@@ -46,6 +46,7 @@ docker run -v /path/to/mapproxy:/mapproxy -p 8080:8080 yagajs/mapproxy mapproxy 
 
 * `MAPPROXY_PROCESSES` default: 4
 * `MAPPROXY_THREADS` default: 2
+* `UWSGI_EXTRA_OPTIONS` extra `uwsgi` commandline options e.g. `"--disable-logging --stats 0.0.0.0:9191"`, default empty
 
 ## Seeding
 
