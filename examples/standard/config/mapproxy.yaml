@@ -1,0 +1,85 @@
+# More standard MapProxy configuration showing:
+#
+# - GeoPackage as tile cache
+# - custom grid (using Dutch standard tiling grid)
+# - multiple tilegrids/caches
+
+services:
+  demo:
+  tms:
+    use_grid_names: true
+    # origin for /tiles service
+    origin: 'nw'
+  kml:
+      use_grid_names: true
+  wmts:
+  wms:
+    md:
+      title: MapProxy WMS Proxy
+      abstract: This is a minimal MapProxy example.
+
+layers:
+  - name: osm
+    title: Omniscale OSM WMS - osm.omniscale.net
+    sources: [osm_cache]
+
+  - name: dutch_aerial
+    title: Dutch public aerial Map - by Dutch Kadaster-PDOK - RGB 25cm resolution - 2019
+    sources: [dutch_aerial_cache]
+
+caches:
+  osm_cache:
+    grids: [webmercator]
+    sources: [osm_wms]
+
+  dutch_aerial_cache:
+    # Store res 0-12 (RD) and 0-17 (merc, 18 levels)
+    grids: [dutch_tile_grid, webmercator]
+    sources: [dutch_aerial_wms]
+    format: image/jpeg
+    meta_buffer: 0
+    meta_size: [4,4]
+    use_direct_from_res: 0.30
+    cache:
+      type: geopackage
+      filename: gpkg/openlufo.gpkg
+      levels: false
+
+sources:
+  osm_wms:
+    type: wms
+    req:
+      url: https://maps.omniscale.net/v2/demo/style.default/service?
+      layers: osm
+
+  dutch_aerial_wms:
+    type: wms
+    req:
+      url: https://geodata.nationaalgeoregister.nl/luchtfoto/rgb/wms?
+      layers: 2019_ortho25
+      format: image/jpeg
+      transparent: false
+    coverage:
+      # Extent of 37.5 px/km map
+      bbox: [-285401.92,22598.08,595401.92,903401.92]
+      srs: 'EPSG:28992'
+    supported_srs: ['EPSG:28992', 'EPSG:4326', 'EPSG:3857']
+
+grids:
+    webmercator:
+        base: GLOBAL_WEBMERCATOR
+
+    dutch_tile_grid:
+      tile_size: [256, 256]
+      srs: 'EPSG:28992'
+      bbox: [-285401.920, 22598.080, 595401.920, 903401.920]
+      bbox_srs: 'EPSG:28992'
+      # 17 levels  0-16
+      res: [3440.64, 1720.32, 860.16, 430.08, 215.04, 107.52, 53.76, 26.88, 13.44, 6.72, 3.36, 1.68, 0.84, 0.42, 0.21, 0.105, 0.0525]
+
+globals:
+  cache:
+    # where to store the cached images
+    base_dir: '/mapproxy_cache'
+    # where to store lockfiles
+    lock_dir: '/mapproxy_cache/locks'

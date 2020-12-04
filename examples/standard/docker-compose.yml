@@ -1,0 +1,22 @@
+version: "3"
+
+# Example docker-compose file, adapt for your setup
+services:
+
+  mapproxy:
+
+    image: justb4/mapproxy:latest
+    build: ../../.
+
+    container_name: mapproxy
+
+    environment:
+      - MAPPROXY_PROCESSES=4
+      - MAPPROXY_THREADS=2
+
+    ports:
+      - "8085:8080"
+
+    volumes:
+      - ./config:/mapproxy:rw
+      - ./cache:/mapproxy_cache:rw
