@@ -25,7 +25,7 @@ ARG LOCALE="en_US.UTF-8"
 # Only adds 1MB and handy tools
 ARG ADD_DEB_PACKAGES="curl xsltproc libxml2-utils patch"
 ARG ADD_PIP_PACKAGES=""
-ARG MAPPROXY_VERSION="1.12.0"
+ARG MAPPROXY_VERSION="1.13.2"
 
 # ENV settings
 ENV MAPPROXY_PROCESSES="4" \

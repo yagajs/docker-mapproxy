@@ -10,7 +10,7 @@ Find image on [Docker Hub](https://hub.docker.com/repository/docker/justb4/mappr
 
 ## Supported tags
 
-* `1.12.0`, `1.12`, `1`, `latest`
+* `1.13.2`, `latest`
 
 ## What is MapProxy
 

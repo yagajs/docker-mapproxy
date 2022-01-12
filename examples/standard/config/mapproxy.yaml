@@ -7,11 +7,11 @@
 services:
   demo:
   tms:
-    use_grid_names: true
+    use_grid_names: false
     # origin for /tiles service
     origin: 'nw'
   kml:
-      use_grid_names: true
+    use_grid_names: true
   wmts:
   wms:
     md:
@@ -24,7 +24,7 @@ layers:
     sources: [osm_cache]
 
   - name: dutch_aerial
-    title: Dutch public aerial Map - by Dutch Kadaster-PDOK - RGB 25cm resolution - 2019
+    title: Dutch public aerial Map - by Dutch Kadaster-PDOK - RGB 7.5cm resolution - latest
     sources: [dutch_aerial_cache]
 
 caches:
@@ -34,7 +34,7 @@ caches:
 
   dutch_aerial_cache:
     # Store res 0-12 (RD) and 0-17 (merc, 18 levels)
-    grids: [dutch_tile_grid, webmercator]
+    grids: [dutch_tile_grid, webmercator, mercator]
     sources: [dutch_aerial_wms]
     format: image/jpeg
     meta_buffer: 0
@@ -55,8 +55,8 @@ sources:
   dutch_aerial_wms:
     type: wms
     req:
-      url: https://geodata.nationaalgeoregister.nl/luchtfoto/rgb/wms?
-      layers: 2019_ortho25
+      url: https://service.pdok.nl/hwh/luchtfotorgb/wms/v1_0?
+      layers: Actueel_orthoHR
       format: image/jpeg
       transparent: false
     coverage:
@@ -76,6 +76,37 @@ grids:
       bbox_srs: 'EPSG:28992'
       # 17 levels  0-16
       res: [3440.64, 1720.32, 860.16, 430.08, 215.04, 107.52, 53.76, 26.88, 13.44, 6.72, 3.36, 1.68, 0.84, 0.42, 0.21, 0.105, 0.0525]
+
+    mercator:
+      base: GLOBAL_MERCATOR
+      tile_size: [256, 256]
+      srs: 'EPSG:900913'
+      # zoom 0-23
+      # See https://gist.github.com/gagan-bansal/db6fb206f61b38f2f1c3
+      res: [156543.03392804097,
+             78271.51696402048,
+             39135.75848201024,
+             19567.87924100512,
+             9783.93962050256,
+             4891.96981025128,
+             2445.98490512564,
+             1222.99245256282,
+             611.49622628141,
+             305.748113140705,
+             152.8740565703525,
+             76.43702828517625,
+             38.21851414258813,
+             19.109257071294063,
+             9.554628535647032,
+             4.777314267823516,
+             2.388657133911758,
+             1.194328566955879,
+             0.5971642834779395,
+             0.29858214173896974,
+             0.14929107086948487,
+             0.07464553543474244,
+             0.03732276771737122,
+             0.01866138385868561]
 
 globals:
   cache:
