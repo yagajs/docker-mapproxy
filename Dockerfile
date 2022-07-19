@@ -34,7 +34,7 @@ ENV MAPPROXY_PROCESSES="4" \
 	DEBIAN_FRONTEND="noninteractive" \
 	DEB_BUILD_DEPS="python3-pip build-essential python3-dev python3-setuptools python3-wheel" \
 	DEB_PACKAGES="python3-pil python3-yaml python3-gdal libproj13 python3-lxml python3-shapely libgeos-dev uwsgi-plugin-python3 ${ADD_DEB_PACKAGES}" \
-	PIP_PACKAGES="uwsgi requests geojson MapProxy==${MAPPROXY_VERSION} ${ADD_PIP_PACKAGES}"
+	PIP_PACKAGES="uwsgi requests geojson watchdog MapProxy==${MAPPROXY_VERSION} ${ADD_PIP_PACKAGES}"
 
 RUN set -x \
   && apt-get update \
