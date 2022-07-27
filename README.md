@@ -1,35 +1,16 @@
-# Mapproxy for Docker
+# MapProxy for Docker
 
-MapProxy docker image from the [YAGA Development-Team](https://yagajs.org)
+![GitHub license](https://img.shields.io/github/license/justb4/docker-mapproxy)
+![GitHub release](https://img.shields.io/github/release/justb4/docker-mapproxy.svg)
+![Docker Pulls](https://img.shields.io/docker/pulls/justb4/mapproxy.svg)
+
+MapProxy Docker Image from the [YAGA Development-Team](https://yagajs.org).
+Adapted by [justb4](https://github.com/justb4) to latest MP version, small Docker image and extended examples.
+Find image on [Docker Hub](https://hub.docker.com/repository/docker/justb4/mapproxy).
 
 ## Supported tags
 
-* `1.11.0`, `1.11`, `1`, `latest`
-* `1.11.0-alpine`, `1.11-alpine`, `1-alpine`, `alpine`
-* `1.10.4`, `1.10`
-* `1.10.4-alpine`, `1.10-alpine`
-* `1.10.3`
-* `1.10.3-alpine`
-* `1.10.2`
-* `1.10.2-alpine`
-* `1.10.1`
-* `1.10.1-alpine`
-* `1.10.0`
-* `1.10.0-alpine`
-* `1.9.1`, `1.9`
-* `1.9.1-alpine`, `1.9-alpine`
-* `1.9.0`
-* `1.9.0-alpine`
-* `1.8.2`, `1.8`
-* `1.8.2-alpine`, `1.8-alpine`
-* `1.8.1`
-* `1.8.1-alpine`
-* `1.8.0`
-* `1.8.0-alpine`
-* `1.7.1`, `1.7`
-* `1.7.1-alpine`, `1.7-alpine`
-* `1.7.0`
-* `1.7.0-alpine`
+* `1.13.2`, `latest`
 
 ## What is MapProxy
 
@@ -38,7 +19,14 @@ data from existing map services and serves any desktop or web GIS client.
 
 ## Run container
 
-You can run the container with a command like this:
+See the examples, these use `docker-compose`, more convenient than `docker run` commands:
+
+* [default](examples/default) - default out-of-the-box example
+* [standard](examples/standard) - mapproxy [config](examples/standard/config/mapproxy.yaml) with some facilities like GeoPackage tile cache, custom grid etc
+
+The second example should give you a nice starter.
+
+But you can run the container with standard `docker`:
 
 ```bash
 docker run -v /path/to/mapproxy:/mapproxy -p 8080:8080 yagajs/mapproxy
@@ -58,6 +46,17 @@ docker run -v /path/to/mapproxy:/mapproxy -p 8080:8080 yagajs/mapproxy mapproxy 
 
 * `MAPPROXY_PROCESSES` default: 4
 * `MAPPROXY_THREADS` default: 2
+* `UWSGI_EXTRA_OPTIONS` extra `uwsgi` commandline options e.g. `"--disable-logging --stats 0.0.0.0:9191"`, default empty
+
+## Seeding
+
+The image also allows arbitrary commands like seeding:
+
+```bash 
+
+docker exec -it mapproxy mapproxy-seed -f /mapproxy/mapproxy.yaml -s /mapproxy/seed.yaml --seed myseed1
+
+```
 
 ## Enhance the image
 
@@ -67,6 +66,8 @@ used as MapProxy configuration. Attention, this will override an existing config
 Additional you can put shell-scripts, with `.sh`-suffix in that folder. They get executed on container startup.
 
 You should use the `mapproxy` user within the container, especially not `root`!
+
+You can also add extra packages in build args: `ADD_DEB_PACKAGES` and `ADD_PIP_PACKAGES`.
 
 ## Contributing
 
